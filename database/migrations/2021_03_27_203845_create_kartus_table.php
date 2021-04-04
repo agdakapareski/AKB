@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomersTable extends Migration
+class CreateKartusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('kartus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_customer');
-            $table->string('email_customer')->nullable();
-            $table->string('telepon_customer')->nullable();
+            $table->string('jenis_kartu');
+            $table->string('nama_pemilik_kartu');
+            $table->string('nomor_kartu');
+            $table->date('exp_date_kartu');
             $table->timestamps();
-            $table->softDeletes('deleted_at');
         });
     }
 
@@ -30,6 +30,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('kartus');
     }
 }

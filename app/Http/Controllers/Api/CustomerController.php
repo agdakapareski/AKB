@@ -13,13 +13,13 @@ class CustomerController extends Controller
         $customers = Customer::all();
         if(count($customers) > 0){
             return response([
-                'message' => 'Retrieve All Success',
+                'message' => 'Berhasil menampilkan customer',
                 'data' => $customers
             ], 200);
         }
 
         return response([
-            'message' => 'Empty',
+            'message' => 'Kosong',
             'data' => null
         ], 404);
     }
@@ -28,13 +28,13 @@ class CustomerController extends Controller
         $customers = Customer::find($id);
         if(!is_null($customers)){
             return response([
-                'message' => 'Retrieve Customer Success',
+                'message' => 'Berhasil menampilkan customer',
                 'data' => $customers
             ], 200);
         }
 
         return response([
-            'message' => 'Customer not found',
+            'message' => 'Customer tidak ditemukan',
             'data' => null
         ], 404);
     }
@@ -52,7 +52,7 @@ class CustomerController extends Controller
 
         $customers = Customer::create($storeData);
         return response([
-            'message' => 'Add Customer Success',
+            'message' => 'Tambah customer sukses',
             'data' => $customers
         ], 200);
     }
@@ -61,7 +61,7 @@ class CustomerController extends Controller
         $customers = Customer::find($id);
         if(is_null($customers)){
             return response([
-                'message' => 'Customer Not Found',
+                'message' => 'Customer tidak ditemukan',
                 'data' => null
             ], 404);
         }
@@ -82,14 +82,36 @@ class CustomerController extends Controller
 
         if($customers -> save()){
             return response([
-                'message' => 'Update Customer Success',
+                'message' => 'Update Customer Sukses',
                 'data' => $customers
             ], 200);
         }
 
         return response([
-            'message' => 'Update Customer Failed',
+            'message' => 'Update Customer Gagal',
             'data' => null
+        ], 400);
+    }
+
+    public function destroy($id){
+        $customers = Customer::find($id);
+
+        if(is_null($customers)){
+            return response([
+                'message' => 'Customer tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+
+        if($customers -> delete()){
+            return response([
+                'message' => 'Delete Customer Sukses',
+                'data' => $customers,
+            ], 200);
+        }
+        return response([
+            'message' => 'Delete Customer Gagal',
+            'data' => null,
         ], 400);
     }
 }

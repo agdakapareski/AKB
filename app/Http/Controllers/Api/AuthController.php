@@ -13,7 +13,7 @@ class AuthController extends Controller {
         $registrationData = $request -> all();
         $validate = Validator::make($registrationData, [
             'nama_pegawai' => 'required|max:60',
-            'email_pegawai' => 'required|email:rfc, dns|unique:users',
+            'email_pegawai' => 'required',
             'password' => 'required',
             'kelamin_pegawai' => 'required',
             'posisi_pegawai' => 'required',
@@ -24,32 +24,39 @@ class AuthController extends Controller {
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
         
-        $user = User::create($registrationData);
+        $registrationData['password'] = bcrypt($request -> password);
+        $users = User::create($registrationData);
         return response([
             'message' => 'Register Success',
-            'user' => $user,
+            'user' => $users
         ], 200);
     }
 
     public function login(Request $request) {
         $loginData = $request -> all();
         $validate = Validator::make($loginData, [
-            'email_pegawai' => 'required|email:rfc, dns',
-            'password' => 'required',
+            'email_pegawai' => 'required',
+            'password' => 'required'
         ]);
 
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
 
-        if(!Auth::attempt($loginData))
+        if(!Auth::attempt($loginData)){
             return response(['message' => 'Invalid Credentials'], 401);
+        }
 
-        $user = Auth::user();
-        $token = $user -> createToken('Authentication Token') -> accessToken;
+        $users = Auth::user();
+
+        if ($users -> status_pegawai == 'nonaktif') {
+            return response(['message' => 'Akun nonaktif'], 400);
+        }
+        
+        $token = $users -> createToken('Authentication Token') -> accessToken;
 
         return response([
             'message' => 'Authenticated',
-            'user' => $user,
+            'user' => $users,
             'token_type' => 'Bearer',
             'access_token' => $token
         ]);

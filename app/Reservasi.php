@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-class Customer extends Model
+class Reservasi extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'nama_customer', 'email_customer', 'telepon_customer'
+        'id_pegawai', 'id_customer', 'id_meja', 'tanggal_reservasi', 'jam_reservasi'
     ];
 
     public function getCreatedAtAttribute(){

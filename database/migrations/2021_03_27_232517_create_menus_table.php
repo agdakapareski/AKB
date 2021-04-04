@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomersTable extends Migration
+class CreateMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_customer');
-            $table->string('email_customer')->nullable();
-            $table->string('telepon_customer')->nullable();
+            $table->unsignedBigInteger('id_bahan');
+            $table->string('nama_menu');
+            $table->string('kategori_menu');
+            $table->double('harga');
             $table->timestamps();
             $table->softDeletes('deleted_at');
+            $table->foreign('id_bahan')->references('id')->on('bahans');
         });
     }
 
@@ -30,6 +32,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('menus');
     }
 }
