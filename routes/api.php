@@ -34,4 +34,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('users', 'Api\AuthController@register');
     Route::put('users/{id}', 'Api\UserController@update');
     Route::delete('users/{id}', 'Api\UserController@destroy');
+
+    Route::get('bahans', 'Api\BahanController@index');
+    Route::get('bahans/{id}', 'Api\BahanController@show');
+    Route::post('bahans', 'Api\BahanController@store');
+    Route::put('bahans/{id}', 'Api\BahanController@update');
+    Route::delete('bahans/{id}', 'Api\BahanController@destroy');
 });
