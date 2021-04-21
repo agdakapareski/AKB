@@ -42,7 +42,6 @@ class MenuController extends Controller
     public function store(Request $request) {
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
-            'id_bahan' => 'required|integer',
             'nama_menu' => 'required',
             'kategori_menu' => 'required',
             'harga' => 'required|double'
@@ -70,7 +69,6 @@ class MenuController extends Controller
 
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
-            'id_bahan' => 'required|integer',
             'nama_menu' => 'required',
             'kategori_menu' => 'required',
             'harga' => 'required|double'
@@ -80,7 +78,6 @@ class MenuController extends Controller
             return response(['message' => $validate -> errors()], 400);
         }
 
-        $menus -> id_bahan = $updateData['id_bahan'];
         $menus -> nama_menu = $updateData['nama_menu'];
         $menus -> kategori_menu = $updateData['kategori_menu'];
         $menus -> harga = $updateData['harga'];

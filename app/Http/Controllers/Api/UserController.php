@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id){
         $users = User::find($id);
-        if(isnull($users)){
+        if(is_null($users)){
             return response([
                 'message' => 'Pegawai tidak ditemukan',
                 'data' => null
@@ -51,7 +51,7 @@ class UserController extends Controller
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
             'nama_pegawai' => 'required|max:60',
-            'email_pegawai' => 'required|email:rfc, dns|unique:users',
+            'email_pegawai' => 'required',
             'password' => 'required',
             'kelamin_pegawai' => 'required',
             'posisi_pegawai' => 'required',

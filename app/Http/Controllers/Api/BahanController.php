@@ -44,7 +44,6 @@ class BahanController extends Controller
     public function store(Request $request) {
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
-            'id_stok' => 'required|integer',
             'nama_bahan' => 'required',
             'serving_size' => 'required'
         ]);
@@ -70,7 +69,6 @@ class BahanController extends Controller
 
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
-            'id_stok' => 'required|integer',
             'nama_bahan' => 'required',
             'serving_size' => 'required'
         ]);
@@ -78,7 +76,6 @@ class BahanController extends Controller
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
         
-        $bahans -> id_stok = $updateData['id_stok'];
         $bahans -> nama_bahan = $updateData['nama_bahan'];
         $bahans -> serving_size = $updateData['serving_size'];
 

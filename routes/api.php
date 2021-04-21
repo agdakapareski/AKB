@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
+Route::post('logout', 'Api\AuthController@logout');
+
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::get('customers', 'Api\CustomerController@index');
