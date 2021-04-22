@@ -59,6 +59,8 @@ class UserController extends Controller
             'status_pegawai' => 'required',
         ]);
 
+        $updateData['password'] = bcrypt($request -> password);
+
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
         

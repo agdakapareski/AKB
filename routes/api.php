@@ -42,4 +42,16 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('bahans', 'Api\BahanController@store');
     Route::put('bahans/{id}', 'Api\BahanController@update');
     Route::delete('bahans/{id}', 'Api\BahanController@destroy');
+
+    Route::get('menus', 'Api\MenuController@index');
+    Route::get('menus/{id}', 'Api\MenuController@show');
+    Route::post('menus', 'Api\MenuController@store');
+    Route::put('menus/{id}', 'Api\MenuController@update');
+    Route::delete('menus/{id}', 'Api\MenuController@destroy');
+
+    Route::get('mejas', 'Api\MejaController@index');
+    Route::get('mejas/{id}', 'Api\MejaController@show');
+    Route::post('mejas', 'Api\MejaController@store');
+    Route::put('mejas/{id}', 'Api\MejaController@update');
+    Route::delete('mejas/{id}', 'Api\MejaController@destroy');
 });

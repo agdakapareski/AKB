@@ -44,7 +44,7 @@ class MenuController extends Controller
         $validate = Validator::make($storeData, [
             'nama_menu' => 'required',
             'kategori_menu' => 'required',
-            'harga' => 'required|double'
+            'harga' => 'required|numeric'
         ]);
 
         if($validate -> fails()) {
@@ -71,7 +71,7 @@ class MenuController extends Controller
         $validate = Validator::make($updateData, [
             'nama_menu' => 'required',
             'kategori_menu' => 'required',
-            'harga' => 'required|double'
+            'harga' => 'required|numeric'
         ]);
 
         if($validate -> fails()) {

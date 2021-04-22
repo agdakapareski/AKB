@@ -11,7 +11,7 @@ class Menu extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'id_bahan', 'nama_menu', 'kategori_menu', 'harga'
+        'nama_menu', 'kategori_menu', 'harga'
     ];
 
     public function getCreatedAtAttribute(){
