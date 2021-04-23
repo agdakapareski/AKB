@@ -53,5 +53,4 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('mejas/{id}', 'Api\MejaController@show');
     Route::post('mejas', 'Api\MejaController@store');
     Route::put('mejas/{id}', 'Api\MejaController@update');
-    Route::delete('mejas/{id}', 'Api\MejaController@destroy');
 });

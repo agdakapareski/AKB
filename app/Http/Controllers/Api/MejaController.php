@@ -89,26 +89,4 @@ class MejaController extends Controller
             'data' => null
         ], 400);
     }
-
-    public function destroy($id){
-        $mejas = Meja::find($id);
-
-        if(is_null($mejas)){
-            return response([
-                'message' => 'Data Meja tidak ditemukan',
-                'data' => null
-            ], 404);
-        }
-
-        if($mejas -> delete()){
-            return response([
-                'message' => 'Delete Data Meja Sukses',
-                'data' => $mejas,
-            ], 200);
-        }
-        return response([
-            'message' => 'Delete Data Meja Gagal',
-            'data' => null,
-        ], 400);
-    }
 }

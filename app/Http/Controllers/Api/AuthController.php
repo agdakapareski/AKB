@@ -43,7 +43,7 @@ class AuthController extends Controller {
             return response(['message' => $validate -> errors()], 400);
 
         if(!Auth::attempt($loginData)){
-            return response(['message' => 'Invalid Credentials'], 401);
+            return response(['message' => 'Kombinasi email & password salah!'], 401);
         }
 
         $users = Auth::user();
