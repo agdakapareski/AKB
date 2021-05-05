@@ -10,7 +10,7 @@ use Validator;
 class MenuController extends Controller
 {
     public function index(){
-        $menus = Menu::all();
+        $menus = Menu::join('bahans', 'menus.id_bahan', '=' ,'bahans.id') -> select('menus.*', 'bahans.*') -> get();
         if(count($menus) > 0) {
             return response([
                 'message' => 'Berhasil menampilkan menu',
@@ -22,6 +22,15 @@ class MenuController extends Controller
             'message' => 'Kosong',
             'data' => null
         ], 404);
+    }
+
+    public function showMobile(){
+        $menus = Menu::all();
+        if(count($menus) > 0) {
+            return response(
+                $menus
+            , 200);
+        }
     }
 
     public function show($id) {
@@ -43,7 +52,9 @@ class MenuController extends Controller
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
             'nama_menu' => 'required',
+            'id_bahan' => 'required|numeric',
             'kategori_menu' => 'required',
+            'deskripsi_menu' => 'required',
             'harga' => 'required|numeric'
         ]);
 
@@ -70,7 +81,9 @@ class MenuController extends Controller
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
             'nama_menu' => 'required',
+            'id_bahan' => 'required|numeric',
             'kategori_menu' => 'required',
+            'deskripsi_menu' => 'required',
             'harga' => 'required|numeric'
         ]);
 
@@ -79,7 +92,9 @@ class MenuController extends Controller
         }
 
         $menus -> nama_menu = $updateData['nama_menu'];
+        $menus -> id_bahan = $updateData['id_bahan'];
         $menus -> kategori_menu = $updateData['kategori_menu'];
+        $menus -> deskripsi_menu = $updateData['deskripsi_menu'];
         $menus -> harga = $updateData['harga'];
 
         if($menus -> save()) {

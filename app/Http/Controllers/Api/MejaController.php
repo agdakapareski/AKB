@@ -42,7 +42,7 @@ class MejaController extends Controller
     public function store(Request $request){
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
-            'nomor_meja' => 'required',
+            'nomor_meja' => 'required|numeric',
             'status_meja' => 'required'
         ]);
 
@@ -67,7 +67,7 @@ class MejaController extends Controller
 
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
-            'nomor_meja' => 'required',
+            'nomor_meja' => 'required|numeric',
             'status_meja' => 'required'
         ]);
 
@@ -86,6 +86,29 @@ class MejaController extends Controller
 
         return response([
             'message' => 'Update data meja Gagal',
+            'data' => null
+        ], 400);
+    }
+
+    public function destroy($id) {
+        $mejas = Meja::find($id);
+
+        if(is_null($mejas)) {
+            return response([
+                'message' => 'Meja tidak ditemukan',
+                'data' => null
+            ], 404);
+        }
+
+        if($mejas -> delete()) {
+            return response([
+                'message' => 'Delete Meja berhasil',
+                'data' => $mejas
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Delete Meja gagal',
             'data' => null
         ], 400);
     }

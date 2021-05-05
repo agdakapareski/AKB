@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMejasTable extends Migration
+class CreateDetailTransaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMejasTable extends Migration
      */
     public function up()
     {
-        Schema::create('mejas', function (Blueprint $table) {
-            $table->id();
-            $table->integer('nomor_meja');
-            $table->string('status_meja');
-            $table->timestamps();
+        Schema::create('detail_transaksi', function (Blueprint $table) {
+            $table->id('id_detail_transaksi');
+            $table->string('nama_customer');
+            $table->string('nama_menu');
+            $table->integer('jumlah_pesanan');
+            $table->string('status_pesanan')->nullable();
             $table->softDeletes('deleted_at');
         });
     }
@@ -29,6 +30,6 @@ class CreateMejasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mejas');
+        Schema::dropIfExists('detail_transaksi');
     }
 }

@@ -17,14 +17,18 @@ Route::post('login', 'Api\AuthController@login');
 Route::post('register', 'Api\AuthController@register');
 Route::post('logout', 'Api\AuthController@logout');
 
+Route::delete('customers/{id}', 'Api\CustomerController@destroy');
+
+Route::get('menuMobile', 'Api\MenuController@index');
+Route::get('menuMobile1', 'Api\MenuController@showMobile');
 
 Route::group(['middleware' => 'auth:api'], function() {
+    
     Route::get('customers', 'Api\CustomerController@index');
     Route::get('customers/{id}', 'Api\CustomerController@show');
     Route::post('customers', 'Api\CustomerController@store');
     Route::put('customers/{id}', 'Api\CustomerController@update');
-    Route::delete('customers/{id}', 'Api\CustomerController@destroy');
-
+    
     Route::get('stoks', 'Api\StokController@index');
     Route::get('stoks/{id}', 'Api\StokController@show');
     Route::post('stoks', 'Api\StokController@store');
@@ -35,6 +39,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('users/{id}', 'Api\UserController@show');
     Route::post('users', 'Api\AuthController@register');
     Route::put('users/{id}', 'Api\UserController@update');
+    Route::put('usersnon/{id}', 'Api\UserController@nonaktif');
     Route::delete('users/{id}', 'Api\UserController@destroy');
 
     Route::get('bahans', 'Api\BahanController@index');
@@ -53,4 +58,11 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('mejas/{id}', 'Api\MejaController@show');
     Route::post('mejas', 'Api\MejaController@store');
     Route::put('mejas/{id}', 'Api\MejaController@update');
+    Route::delete('mejas/{id}', 'Api\MejaController@destroy');
+
+    Route::get('menu2', 'Api\Menu2Controller@index');
+    Route::get('menu2/{find}', 'Api\Menu2Controller@show');
+    Route::post('menu2', 'Api\Menu2Controller@store');
+    Route::put('menu2/{find}', 'Api\Menu2Controller@update');
+    Route::delete('menu2/{find}', 'Api\Menu2Controller@destroy');
 });

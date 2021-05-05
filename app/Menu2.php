@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-class Bahan extends Model
+class Menu2 extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'menu';
+    protected $primaryKey = 'id_menu';
     protected $fillable = [
-        'nama_bahan', 'serving_size', 'satuan_serving'
+        'id_menu', 'nama_menu', 'id_bahan', 'kategori_menu', 'deskripsi_menu', 'harga',
     ];
 
     public function getCreatedAtAttribute(){

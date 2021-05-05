@@ -39,6 +39,23 @@ class UserController extends Controller
         ], 404);
     }
 
+    public function nonaktif($id) {
+        $users = User::find($id);
+        $users -> status_pegawai = 'nonaktif';
+        $users -> save();
+        if($users -> save()){
+            return response([
+                'message' => 'Pegawai Dinonaktifkan',
+                'data' => $users
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Gagal',
+            'data' => null
+        ], 400);
+    }
+
     public function update(Request $request, $id){
         $users = User::find($id);
         if(is_null($users)){
@@ -51,7 +68,7 @@ class UserController extends Controller
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
             'nama_pegawai' => 'required|max:60',
-            'email_pegawai' => 'required',
+            'email_pegawai' => 'required|email:rfc,dns',
             'password' => 'required',
             'kelamin_pegawai' => 'required',
             'posisi_pegawai' => 'required',

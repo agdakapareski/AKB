@@ -13,7 +13,7 @@ class AuthController extends Controller {
         $registrationData = $request -> all();
         $validate = Validator::make($registrationData, [
             'nama_pegawai' => 'required|max:60',
-            'email_pegawai' => 'required',
+            'email_pegawai' => 'required|email:rfc,dns',
             'password' => 'required',
             'kelamin_pegawai' => 'required',
             'posisi_pegawai' => 'required',

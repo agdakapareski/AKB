@@ -43,8 +43,8 @@ class CustomerController extends Controller
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
             'nama_customer' => 'required|max:60',
-            'email_customer',
-            'telepon_customer'
+            'email_customer' => 'nullable|email:rfc,dns',
+            'telepon_customer' => 'nullable|digits_between:10,13|numeric|starts_with:08'
         ]);
 
         if($validate -> fails())
@@ -69,8 +69,8 @@ class CustomerController extends Controller
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
             'nama_customer' => 'required|max:60',
-            'email_customer',
-            'telepon_customer'
+            'email_customer' => 'nullable|email:rfc,dns',
+            'telepon_customer' => 'nullable|digits_between:10,13|numeric|starts_with:08'
         ]);
 
         if($validate -> fails())
