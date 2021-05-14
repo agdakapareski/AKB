@@ -27,6 +27,17 @@ class Menu2Controller extends Controller
         ], 404);
     }
 
+    public function indexMobile() {
+        $menus = Menu2::  join('bahans', 'menu.id_bahan', '=' ,'bahans.id') -> select('menu.*', 'bahans.*') -> get();
+       // $menus = Menu::all();
+
+        if(count($menus) > 0) {
+            return response($menus, 200);
+        }
+
+        return response('Empty', 404);
+    }
+
     //method untuk menampilkan 1 data product (search)
     public function show($find) {
         $menu = Menu2:: join('bahans', 'menu.id_bahan', '=' ,'bahans.id') -> select('menu.*', 'bahans.*') ->

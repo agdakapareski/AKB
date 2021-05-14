@@ -18,9 +18,18 @@ Route::post('register', 'Api\AuthController@register');
 Route::post('logout', 'Api\AuthController@logout');
 
 Route::delete('customers/{id}', 'Api\CustomerController@destroy');
+Route::delete('bahans/{id}', 'Api\BahanController@destroy');
 
 Route::get('menuMobile', 'Api\MenuController@index');
-Route::get('menuMobile1', 'Api\MenuController@showMobile');
+Route::get('menuMobile1', 'Api\Menu2Controller@indexMobile');
+
+Route::get('pesananMobile', 'Api\DetailTransaksiController@indexMobile');
+Route::get('pesananMobile/{find}', 'Api\DetailTransaksiController@showNama');
+Route::post('pesananMobile', 'Api\DetailTransaksiController@storeMobile');
+Route::put('pesananMobile/{find}', 'Api\DetailTransaksiController@updateMobile');
+Route::get('totalMobile/{find}', 'Api\DetailTransaksiController@showTotal');
+
+Route::post('transaksiMobile', 'Api\TransaksiController@storeMobile');
 
 Route::group(['middleware' => 'auth:api'], function() {
     
@@ -46,7 +55,6 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('bahans/{id}', 'Api\BahanController@show');
     Route::post('bahans', 'Api\BahanController@store');
     Route::put('bahans/{id}', 'Api\BahanController@update');
-    Route::delete('bahans/{id}', 'Api\BahanController@destroy');
 
     Route::get('menus', 'Api\MenuController@index');
     Route::get('menus/{id}', 'Api\MenuController@show');
@@ -65,4 +73,17 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('menu2', 'Api\Menu2Controller@store');
     Route::put('menu2/{find}', 'Api\Menu2Controller@update');
     Route::delete('menu2/{find}', 'Api\Menu2Controller@destroy');
+
+    Route::get('pesanan', 'Api\DetailTransaksiController@index');
+    Route::get('pesanan/{find}', 'Api\DetailTransaksiController@show');
+    Route::post('pesanan', 'Api\DetailTransaksiController@store');
+    Route::put('pesanan/{find}', 'Api\DetailTransaksiController@update');
+    Route::delete('pesanan/{find}', 'Api\DetailTransaksiController@destroy');
+
+    Route::get('transaksi', 'Api\TransaksiController@index');
+    Route::get('transaksi/{find}', 'Api\TransaksiController@show');
+    Route::post('transaksi', 'Api\TransaksiController@store');
+    Route::put('transaksi/{find}', 'Api\TransaksiController@update');
+    Route::put('transaksiLunas/{find}', 'Api\TransaksiController@lunas');
+    Route::delete('transaksi/{find}', 'Api\TransaksiController@destroy');
 });

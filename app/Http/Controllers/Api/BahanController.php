@@ -45,7 +45,8 @@ class BahanController extends Controller
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
             'nama_bahan' => 'required',
-            'serving_size' => 'required'
+            'serving_size' => 'required',
+            'satuan_serving' => 'required'
         ]);
 
         if($validate -> fails())
@@ -70,7 +71,8 @@ class BahanController extends Controller
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
             'nama_bahan' => 'required',
-            'serving_size' => 'required'
+            'serving_size' => 'required',
+            'satuan_serving' => 'required'
         ]);
 
         if($validate -> fails())
@@ -78,9 +80,10 @@ class BahanController extends Controller
         
         $bahans -> nama_bahan = $updateData['nama_bahan'];
         $bahans -> serving_size = $updateData['serving_size'];
+        $bahans -> satuan_serving = $updateData['satuan_serving'];
 
         if($bahans -> save()) {
-            return reponse([
+            return response([
                 'message' => 'Update bahan berhasil',
                 'data' => $bahans
             ], 200);
