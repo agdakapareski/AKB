@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Menu2;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class Menu2Controller extends Controller
 {
@@ -69,7 +69,7 @@ class Menu2Controller extends Controller
 
         if($validate->fails())
             return response(['message' => $validate->errors()], 400);
-        
+
         $menus = Menu2::create($storeData);
         return response([
             'message' => 'Add Menu Success',
@@ -118,11 +118,11 @@ class Menu2Controller extends Controller
                 'deskripsi_menu' => 'required',
                 'harga' => 'required|numeric',
             ]);
-    
-      
-        if($validate->fails())              
+
+
+        if($validate->fails())
             return response(['message' => $validate->errors()],400);
-   
+
         $menu->nama_menu = $updateData['nama_menu'];
         $menu->kategori_menu = $updateData['kategori_menu'];
         $menu->deskripsi_menu = $updateData['deskripsi_menu'];
@@ -133,5 +133,10 @@ class Menu2Controller extends Controller
                 'data' => $menu,
             ],200);
         }
-    } 
+
+        return response([
+            'message' => 'Update Gagal',
+            'data' => null
+        ], 404);
+    }
 }
