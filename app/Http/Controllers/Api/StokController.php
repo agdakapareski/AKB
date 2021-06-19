@@ -24,8 +24,8 @@ class StokController extends Controller
         ], 404);
     }
 
-    public function show($id){
-        $stoks = Stok::find($id);
+    public function show($find){
+        $stoks = Stok::find($find);
         if(!is_null($stoks)){
             return response([
                 'message' => 'Berhasil menampilkan stok',
@@ -42,8 +42,9 @@ class StokController extends Controller
     public function store(Request $request){
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
-            'nama_stok' => 'required',
-            'jumlah_stok' => 'required'
+            'nama_bahan' => 'required',
+            'jumlah_stok' => 'required',
+            'unit_stok' => 'required',
         ]);
 
         if($validate -> fails())
@@ -56,8 +57,12 @@ class StokController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, $id){
-        $stoks = Stok::find($id);
+    public function update(Request $request, $find){
+        if(is_numeric($find)) {
+            $stoks = Stok::find($find);
+        } else {
+            $stoks = Stok::where('nama_bahan', '=', $find)->first();
+        }
         if(is_null($stoks)){
             return response([
                 'message' => 'Stok tidak ditemukan',
@@ -67,15 +72,17 @@ class StokController extends Controller
 
         $updateData = $request -> all();
         $validate = Validator::make($updateData, [
-            'nama_stok' => 'required',
-            'jumlah_stok' => 'required'
+            'nama_bahan' => 'required',
+            'jumlah_stok' => 'required',
+            'unit_stok' => 'required',
         ]);
 
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
         
-        $stoks -> nama_stok = $updateData['nama_stok'];
+        $stoks -> nama_bahan = $updateData['nama_bahan'];
         $stoks -> jumlah_stok = $updateData['jumlah_stok'];
+        $stoks -> unit_stok = $updateData['unit_stok'];
 
         if($stoks -> save()){
             return response([
@@ -90,8 +97,12 @@ class StokController extends Controller
         ], 400);
     }
 
-    public function destroy($id){
-        $stoks = Stok::find($id);
+    public function destroy($find){
+        if(is_numeric($find)) {
+            $stoks = Stok::find($find);
+        } else {
+            $stoks = Stok::where('nama_bahan', '=', $find)->get();
+        }
 
         if(is_null($stoks)){
             return response([

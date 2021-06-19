@@ -10,8 +10,10 @@ class Reservasi extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'reservasi';
+    protected $primaryKey = 'id_reservasi';
     protected $fillable = [
-        'id_pegawai', 'id_customer', 'id_meja', 'tanggal_reservasi', 'jam_reservasi'
+       'id_reservasi', 'nama_pegawai', 'nama_customer', 'nomor_meja', 'tanggal_reservasi', 'sesi_reservasi'
     ];
 
     public function getCreatedAtAttribute(){

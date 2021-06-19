@@ -45,7 +45,7 @@ class BahanController extends Controller
         $storeData = $request -> all();
         $validate = Validator::make($storeData, [
             'nama_bahan' => 'required',
-            'serving_size' => 'required',
+            'serving_size' => 'required|numeric',
             'satuan_serving' => 'required'
         ]);
 
@@ -77,7 +77,7 @@ class BahanController extends Controller
 
         if($validate -> fails())
             return response(['message' => $validate -> errors()], 400);
-        
+
         $bahans -> nama_bahan = $updateData['nama_bahan'];
         $bahans -> serving_size = $updateData['serving_size'];
         $bahans -> satuan_serving = $updateData['satuan_serving'];

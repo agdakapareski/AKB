@@ -3,17 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-class Stok extends Model
+class HistoriKeluar extends Model
 {
-    use SoftDeletes;
-
-    protected $table = 'stok';
-    protected $primaryKey = 'id_stok';
+    protected $table = 'histori_keluar';
+    protected $primaryKey = 'id_histori_keluar';
     protected $fillable = [
-        'id_stok', 'nama_bahan', 'jumlah_stok', 'unit_stok'
+       'id_histori_keluar', 'tanggal_histori', 'nama_bahan', 'jumlah_stok', 'unit_stok', 'harga_stok', 'keterangan'
     ];
 
     public function getCreatedAtAttribute(){

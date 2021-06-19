@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class CreateReservasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_bahan');
-            $table->string('nama_menu');
-            $table->string('kategori_menu');
-            $table->double('harga');
+        Schema::create('reservasi', function (Blueprint $table) {
+            $table->id('id_reservasi');
+            $table->string('nama_pegawai');
+            $table->string('nama_customer');
+            $table->integer('nomor_meja');
+            $table->date('tanggal_reservasi');
+            $table->string('sesi_reservasi');
             $table->timestamps();
             $table->softDeletes('deleted_at');
-            $table->foreign('id_bahan')->references('id')->on('bahans');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('reservasi');
     }
 }

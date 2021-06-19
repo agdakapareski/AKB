@@ -38,11 +38,11 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('customers', 'Api\CustomerController@store');
     Route::put('customers/{id}', 'Api\CustomerController@update');
     
-    Route::get('stoks', 'Api\StokController@index');
-    Route::get('stoks/{id}', 'Api\StokController@show');
-    Route::post('stoks', 'Api\StokController@store');
-    Route::put('stoks/{id}', 'Api\StokController@update');
-    Route::delete('stoks/{id}', 'Api\StokController@destroy');
+    Route::get('stok', 'Api\StokController@index');
+    Route::get('stok/{find}', 'Api\StokController@show');
+    Route::post('stok', 'Api\StokController@store');
+    Route::put('stok/{find}', 'Api\StokController@update');
+    Route::delete('stok/{find}', 'Api\StokController@destroy');
 
     Route::get('users', 'Api\UserController@index');
     Route::get('users/{id}', 'Api\UserController@show');
@@ -86,4 +86,25 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::put('transaksi/{find}', 'Api\TransaksiController@update');
     Route::put('transaksiLunas/{find}', 'Api\TransaksiController@lunas');
     Route::delete('transaksi/{find}', 'Api\TransaksiController@destroy');
+
+    Route::get('reservasi', 'Api\ReservasiController@index');
+    Route::get('reservasi/{find}', 'Api\ReservasiController@show');
+    Route::post('reservasi', 'Api\ReservasiController@store');
+    Route::put('reservasi/{find}', 'Api\ReservasiController@update');
+    Route::delete('reservasi/{find}', 'Api\ReservasiController@destroy');
+
+    Route::get('histori', 'Api\HistoriController@index');
+    Route::get('histori/{find}', 'Api\HistoriController@show');
+    Route::post('histori', 'Api\HistoriController@store');
+    Route::put('histori/{find}', 'Api\HistoriController@update');
+
+    Route::get('historiKeluar', 'Api\HistoriKeluarController@index');
+    Route::get('historiKeluar/{find}', 'Api\HistoriKeluarController@show');
+    Route::post('historiKeluar', 'Api\HistoriKeluarController@store');
+    Route::put('historiKeluar/{find}', 'Api\HistoriKeluarController@update');
+
+    Route::get('kartu', 'Api\KartuController@index');
+    Route::get('kartu/{find}', 'Api\KartuController@show');
+    Route::post('kartu', 'Api\KartuController@store');
+    Route::put('kartu/{find}', 'Api\KartuController@update');
 });
